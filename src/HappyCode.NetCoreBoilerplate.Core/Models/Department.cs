@@ -5,27 +5,27 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HappyCode.NetCoreBoilerplate.Core.Models
 {
-    [Table("departments", Schema = "employees")]
-    public class Department
+    [Table("doses")]
+    public class Doses
     {
         [Key]
-        [Column("dept_no", TypeName = "char(4)")]
-        public string DeptNo { get; set; }
+        [Column("doses_no", TypeName = "char(14)")]
+        public string DosesNo { get; set; }
 
         [Required]
-        [Column("dept_name")]
-        [StringLength(40)]
-        public string DeptName { get; set; }
+        [Column("application_date")]
+        [StringLength(10)]
+        public string ApplicationDate { get; set; }
 
-        [Column("manger_no", TypeName = "int(11)")]
-        public int MangerNo { get; set; }
+        [Required]
+        [Column("dose_applied")]
+        [StringLength(10)]
+        public string DoseApplied { get; set; }
 
+        [ForeignKey("PatientId")]
+        public Guid PatientNameId { get; set; }
 
-        [ForeignKey("MangerNo")]
-        [InverseProperty("LeadingDepartments")]
-        public virtual Employee Manger { get; set; }
-
-        [InverseProperty("Department")]
-        public virtual ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
+        [ForeignKey("VaccineId")]
+        public Guid VaccineNameId { get; set; }
     }
 }

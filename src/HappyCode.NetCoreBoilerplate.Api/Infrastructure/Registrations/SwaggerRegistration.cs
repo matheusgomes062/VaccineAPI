@@ -16,13 +16,13 @@ namespace HappyCode.NetCoreBoilerplate.Api.Infrastructure.Registrations
             {
                 swaggerOptions.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Simple Api",
+                    Title = "Vaccine Api",
                     Version = "v1",
                     Description = $"ApiKey {secretKey}",
                     Contact = new OpenApiContact
                     {
-                        Name = "Łukasz Kurzyniec",
-                        Url = new Uri("https://kurzyniec.pl/"),
+                        Name = "Matheus Gomes",
+                        Url = new Uri("https://github.com/matheusgomes062"),
                     }
                 });
 

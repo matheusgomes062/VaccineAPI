@@ -17,7 +17,7 @@ namespace HappyCode.NetCoreBoilerplate.Db
             var scriptsAndCodePatternPattern = new Regex(upgradeOptions.ScriptsAndCodePattern ?? ".*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
             var upgrader = DeployChanges.To
-                .SqlDatabase(configuration.GetConnectionString("MsSqlDb"))
+                .SqlDatabase(configuration.GetConnectionString("PostgreSqlDb"))
                 .WithScriptsAndCodeEmbeddedInAssembly(Assembly.GetExecutingAssembly(), (fileName) => scriptsAndCodePatternPattern.IsMatch(fileName))
                 .WithExecutionTimeout(TimeSpan.FromSeconds(upgradeOptions.CommandExecutionTimeoutSeconds))
                 .WithTransaction()

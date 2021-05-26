@@ -45,8 +45,9 @@ namespace HappyCode.NetCoreBoilerplate.Api
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             //there is a difference between AddDbContext() and AddDbContextPool(), more info https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-2.0#dbcontext-pooling and https://stackoverflow.com/questions/48443567/adddbcontext-or-adddbcontextpool
-            services.AddDbContext<EmployeesContext>(options => options.UseMySql(_configuration.GetConnectionString("MySqlDb")), contextLifetime: ServiceLifetime.Transient, optionsLifetime: ServiceLifetime.Singleton);
-            services.AddDbContextPool<CarsContext>(options => options.UseSqlServer(_configuration.GetConnectionString("MsSqlDb")), poolSize: 10);
+            //services.AddDbContext<EmployeesContext>(options => options.UseMySql(_configuration.GetConnectionString("MySqlDb")), contextLifetime: ServiceLifetime.Transient, optionsLifetime: ServiceLifetime.Singleton);
+            //services.AddDbContextPool<CarsContext>(options => options.UseSqlServer(_configuration.GetConnectionString("MsSqlDb")), poolSize: 10);
+            services.AddDbContext<PatientContext>(options => options.UseNpgsql(_configuration.GetConnectionString("PostgreSqlDb")));
 
             services.Configure<ApiKeySettings>(_configuration.GetSection("ApiKey"));
             services.AddSwagger(_configuration);
@@ -61,8 +62,9 @@ namespace HappyCode.NetCoreBoilerplate.Api
                 .AddFeatureFilter<TimeWindowFilter>();
 
             services.AddHealthChecks()
-                .AddMySql(_configuration.GetConnectionString("MySqlDb"))
-                .AddSqlServer(_configuration.GetConnectionString("MsSqlDb"));
+                //.AddMySql(_configuration.GetConnectionString("MySqlDb"))
+                //.AddSqlServer(_configuration.GetConnectionString("MsSqlDb"));
+                .AddNpgSql(_configuration.GetConnectionString("PostgreSqlDb"));
         }
 
         public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
